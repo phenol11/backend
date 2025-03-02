@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 const generateToken = require("./utils/generateToken");
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI || "mongodb://localhost:27017/store")
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Could not connect to MongoDB", err));
 
@@ -19,9 +19,9 @@ app.use(cors());
 
 const port = 3001;
 
-// app.get("/", (req, res) => {
-//   res.send("This is.........");
-// });
+app.get("/", (req, res) => {
+  res.send("This is.........");
+});
 
 app.post("/signup", async (req, res) => {
   try {
